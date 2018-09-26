@@ -2,6 +2,6 @@ I made this dumb thing to practice multiprocessing in python and test the monty 
 
 But anyway, mission accomplished. See ya later nerds.
 
-usage: python montyHall.py /<number of trials/> /<number of cores/>
+usage: python montyHall.py \<number of trial\> \<number of cores\>
 
 If you don't know what you're doing with the cores, just put 1. Not my problem if you pipe yourself with this shitbird.
