@@ -27,18 +27,18 @@ def openDoor(firstChoice, revealedDoor, doors, swap, resultQueue):
             try:
                 resultQueue.put(0)
             except Exception as e: print(e)
-            print("stay win")
+            print("Staying wins!")
             return
-        print("stay fail")
+        print("Staying fails!")
         return
     secondChoice = [door for door in [0, 1, 2] if door not in (firstChoice, revealedDoor)]
     if(doors[secondChoice[0]] == 1):
         try:
             resultQueue.put(0)
         except Exception as e: print(e)
-        print("swap win")
+        print("Swapping wins!")
         return
-    print("swap fails")
+    print("Swapping fails!")
     return
 
 #Must reveal a non-prize door, or a 0
@@ -49,7 +49,6 @@ def hostReveal(doors, firstChoice):
 
 
 def runTrial(swap, resultQueue):
-    print("running Trial!")
     #Generate doors
     doors = [0,0,1]
     shuffle(doors)
@@ -86,11 +85,11 @@ swapResults= swapMan.Queue()
 for trial in range(N):
     r2 = pool.apply_async(runTrial, args=(1, swapResults))
 
-
+#Bring her around cap'n
 pool.close()
-print("Threads closed.")
+print("Pool closed for additional threads/changes.")
 pool.join()
-print("Threads returned to master process.")
+print("Threads returned to master process. Generating results...")
 
 #Queues are acting weird, I could only extract values this way, please review
 stayWins = 0
@@ -106,6 +105,6 @@ if swapResults.empty() == False:
         if swapResults.empty(): break
 
 #Output results
-print("You simulated {} trials of the monty hall problem.").format(N)
+print("{}You simulated {} trials of the monty hall problem.").format("\n\n", N)
 print("By staying you won {0:.2f} percent of the time.").format((stayWins / float(N)) * float(100))
 print("By swapping you won {0:.2f} percent of the time.").format((swapWins / float(N)) * float(100))
